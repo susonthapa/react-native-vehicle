@@ -1,15 +1,15 @@
-# react-native-android-auto
-Android auto for react native
+# react-native-vehicle
+Android-Auto and CarPlay library support for ReactNative
 ## Installation
 
 ```sh
-npm install react-native-android-auto
+npm install react-native-vehicle
 ```
 
 ## Usage
 
 ```js
-import { AndroidAutoView } from "react-native-android-auto";
+import { AndroidAutoView } from "react-native-vehicle";
 
 // ...
 
