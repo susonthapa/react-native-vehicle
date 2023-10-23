@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.20",
-    "react-reconciler": "^0.26.1"
+    "react-reconciler": "0.29.0"
   },
   "devDependencies": {
     "@arkweid/lefthook": "^0.7.7",
@@ -58,7 +58,7 @@
     "@types/jest": "^28.1.2",
     "@types/react": "~18.2.0",
     "@types/react-native": "0.72.5",
-    "@types/react-reconciler": "^0.18.0",
+    "@types/react-reconciler": "0.28.6",
     "@types/lodash": "^4.14.186",
     "commitlint": "^17.0.2",
     "eslint": "^8.19.0",
