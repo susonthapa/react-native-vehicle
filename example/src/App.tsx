@@ -1,14 +1,11 @@
 import React, { FC } from 'react';
 import {
-  SafeAreaView,
+  Image, SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text, useColorScheme,
-  View,
-  NativeEventEmitter,
-  NativeModules,
-  Image,
+  View
 } from 'react-native';
 
 import {
@@ -24,10 +21,10 @@ type SectionProps = {
   title: string,
 }
 
-const emitter = new NativeEventEmitter(NativeModules.Test);
-emitter.addListener('Testing', () => {
-  console.log('TODO: receiving testing events')
-});
+// const emitter = new NativeEventEmitter(NativeModules.Test);
+// emitter.addListener('Testing', () => {
+//   console.log('TODO: receiving testing events')
+// });
 
 const Section: FC<SectionProps> = ({ children, title }) => {
   const isDarkMode = useColorScheme() === 'dark';

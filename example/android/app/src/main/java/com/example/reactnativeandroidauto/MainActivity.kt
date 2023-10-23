@@ -2,7 +2,9 @@ package com.example.reactnativeandroidauto
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
-import com.facebook.react.ReactRootView
+import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
+import com.facebook.react.defaults.DefaultReactActivityDelegate
+
 
 class MainActivity : ReactActivity() {
   /**
@@ -14,20 +16,14 @@ class MainActivity : ReactActivity() {
   }
 
   /**
-   * Returns the instance of the [ReactActivityDelegate]. There the RootView is created and
-   * you can specify the rendered you wish to use (Fabric or the older renderer).
+   * Returns the instance of the [ReactActivityDelegate]. Here we use a util class [ ] which allows you to easily enable Fabric and Concurrent React
+   * (aka React 18) with two boolean flags.
    */
   override fun createReactActivityDelegate(): ReactActivityDelegate {
-    return MainActivityDelegate(this, mainComponentName)
-  }
-
-  class MainActivityDelegate(activity: ReactActivity?, mainComponentName: String?) :
-    ReactActivityDelegate(activity, mainComponentName) {
-    override fun createRootView(): ReactRootView {
-      val reactRootView = ReactRootView(context)
-      // If you opted-in for the New Architecture, we enable the Fabric Renderer.
-      reactRootView.setIsFabric(BuildConfig.IS_NEW_ARCHITECTURE_ENABLED)
-      return reactRootView
-    }
+    return DefaultReactActivityDelegate(
+      this,
+      mainComponentName,  // If you opted-in for the New Architecture, we enable the Fabric Renderer.
+      fabricEnabled
+    )
   }
 }
