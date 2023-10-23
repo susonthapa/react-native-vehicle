@@ -21,11 +21,6 @@ type SectionProps = {
   title: string,
 }
 
-// const emitter = new NativeEventEmitter(NativeModules.Test);
-// emitter.addListener('Testing', () => {
-//   console.log('TODO: receiving testing events')
-// });
-
 const Section: FC<SectionProps> = ({ children, title }) => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
