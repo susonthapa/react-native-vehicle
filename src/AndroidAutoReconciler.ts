@@ -2,6 +2,9 @@ import React from "react";
 import Reconciler, { OpaqueRoot } from "react-reconciler";
 
 import { AppRegistry, DeviceEventEmitter } from "react-native";
+import {
+  DefaultEventPriority
+} from 'react-reconciler/constants';
 import { AndroidAutoModule } from "./AndroidAuto";
 import { RootView } from "./AndroidAutoReact";
 import type {
@@ -69,8 +72,11 @@ const Renderer = Reconciler<
   any,
   any,
   any,
+  any,
   any
 >({
+  supportsMutation: true,
+  supportsPersistence: false,
   createInstance(
     type,
     allProps,
@@ -93,31 +99,12 @@ const Renderer = Reconciler<
 
     return element;
   },
-  now: Date.now,
-  setTimeout,
-  clearTimeout,
-  noTimeout: false,
-  isPrimaryRenderer: true,
-  supportsMutation: true,
-  supportsHydration: false,
-  supportsPersistence: false,
-
-  // Context
-  getRootHostContext() {
-    return {};
-  },
-  getChildHostContext(context) {
-    return context;
-  },
-
-  // Instances
   createTextInstance(_text, _fragment) {
-    return {};
+    throw new Error('Renderer does not support text instance')
   },
-
-  // Updates
-  commitTextUpdate(_text, _oldText, _newText) {
-    // noop
+  appendInitialChild: appendChild,
+  finalizeInitialChildren() {
+    return false;
   },
   prepareUpdate(_instance, _type, oldProps, newProps) {
     const updateProps: Record<string, unknown> = {};
@@ -151,46 +138,13 @@ const Renderer = Reconciler<
 
     return needsUpdate ? updateProps : null;
   },
-  commitUpdate: applyProps,
-
-  // Update root
-  appendChildToContainer: appendChild,
-  insertInContainerBefore: insertBefore,
-  removeChildFromContainer: removeChild,
-
-  // Update children
-  appendInitialChild: appendChild,
-  appendChild,
-  insertBefore,
-  removeChild,
-
-  // Deferred callbacks
-  scheduleDeferredCallback() { },
-  cancelDeferredCallback() { },
-
-  ...({
-    schedulePassiveEffects(fn: () => void) {
-      return setTimeout(fn, 0);
-    },
-    cancelPassiveEffects(handle: number) {
-      clearTimeout(handle);
-    },
-  } as {}),
-
-  // Unknown
-  finalizeInitialChildren() {
-    return false;
+  shouldSetTextContent: () => false,
+  getRootHostContext: () => null,
+  getChildHostContext: (context) => {
+    return context;
   },
-  shouldSetTextContent() {
-    return false;
-  },
-  getPublicInstance() { },
-  shouldDeprioritizeSubtree() {
-    return false;
-  },
-  prepareForCommit() {
-    return null;
-  },
+  getPublicInstance: (instance) => instance,
+  prepareForCommit: () => null,
   resetAfterCommit(containerInfo: Container) {
     if (containerInfo.type !== "root-container") {
       console.log("Root container must be a RootContainer");
@@ -246,14 +200,36 @@ const Renderer = Reconciler<
 
     containerInfo.prevStack = containerInfo.stack;
   },
-  commitMount() { },
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore
+  preparePortalMount: () => { },
+  scheduleTimeout: setTimeout,
+  cancelTimeout: clearTimeout,
+  noTimeout: -1,
+  supportsMicrotasks: false,
+  isPrimaryRenderer: true,
+
+  getCurrentEventPriority: () => DefaultEventPriority,
+  getInstanceFromNode: () => undefined,
+  beforeActiveInstanceBlur: () => {},
+  afterActiveInstanceBlur: () => {},
+  prepareScopeUpdate: () => {},
+  getInstanceFromScope: () => null,
+  detachDeletedInstance: () => {},
+
+  appendChild,
+  appendChildToContainer: appendChild,
+  insertBefore,
+  insertInContainerBefore: insertBefore,
+
+  removeChild,
+  removeChildFromContainer: removeChild,
+  commitUpdate: applyProps,
   clearContainer(container?: Container) {
     if (container && "children" in container) {
       container.children = [];
     }
   },
+
+  supportsHydration: false,
 });
 
 let root: OpaqueRoot | undefined
@@ -265,7 +241,9 @@ export function render(element: React.ReactNode) {
     containerInfo: RootContainer
   ) {
     if (!root) {
-      root = Renderer.createContainer(containerInfo as any, false, false);
+      root = Renderer.createContainer(containerInfo as any, 0, null, false, null, '', (error) => {
+        console.log("ERROR: ", error);
+      }, null);
       console.log("Initializing AndroidAuto module");
       AndroidAutoModule.init();
     }
