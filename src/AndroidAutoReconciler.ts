@@ -100,7 +100,7 @@ const Renderer = Reconciler<
     return element;
   },
   createTextInstance(_text, _fragment) {
-    return {};
+    throw new Error('Renderer does not support text instance')
   },
   appendInitialChild: appendChild,
   finalizeInitialChildren() {
@@ -139,9 +139,7 @@ const Renderer = Reconciler<
     return needsUpdate ? updateProps : null;
   },
   shouldSetTextContent: () => false,
-  getRootHostContext: () => {
-    return {};
-  },
+  getRootHostContext: () => null,
   getChildHostContext: (context) => {
     return context;
   },
