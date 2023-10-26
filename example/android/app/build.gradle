@@ -8,45 +8,45 @@ apply plugin: 'com.facebook.react'
  */
 
 react {
-    /* Folders */
-    //   The root of your project, i.e. where "package.json" lives. Default is '..'
-    // root = file("../")
-    //   The folder where the react-native NPM package is. Default is ../node_modules/react-native
-    // reactNativeDir = file("../node_modules/react-native")
-    //   The folder where the react-native Codegen package is. Default is ../node_modules/@react-native/codegen
-    // codegenDir = file("../node_modules/@react-native/codegen")
-    //   The cli.js file which is the React Native CLI entrypoint. Default is ../node_modules/react-native/cli.js
-    // cliFile = file("../node_modules/react-native/cli.js")
-    /* Variants */
-    //   The list of variants to that are debuggable. For those we're going to
-    //   skip the bundling of the JS bundle and the assets. By default is just 'debug'.
-    //   If you add flavors like lite, prod, etc. you'll have to list your debuggableVariants.
-    // debuggableVariants = ["liteDebug", "prodDebug"]
-    /* Bundling */
-    //   A list containing the node command and its flags. Default is just 'node'.
-    // nodeExecutableAndArgs = ["node"]
-    //
-    //   The command to run when bundling. By default is 'bundle'
-    // bundleCommand = "ram-bundle"
-    //
-    //   The path to the CLI configuration file. Default is empty.
-    // bundleConfig = file(../rn-cli.config.js)
-    //
-    //   The name of the generated asset file containing your JS bundle
-    // bundleAssetName = "MyApplication.android.bundle"
-    //
-    //   The entry file for bundle generation. Default is 'index.android.js' or 'index.js'
-    // entryFile = file("../js/MyApplication.android.js")
-    //
-    //   A list of extra flags to pass to the 'bundle' commands.
-    //   See https://github.com/react-native-community/cli/blob/main/docs/commands.md#bundle
-    // extraPackagerArgs = []
-    /* Hermes Commands */
-    //   The hermes compiler command to run. By default it is 'hermesc'
-    // hermesCommand = "$rootDir/my-custom-hermesc/bin/hermesc"
-    //
-    //   The list of flags to pass to the Hermes compiler. By default is "-O", "-output-source-map"
-    // hermesFlags = ["-O", "-output-source-map"]
+  /* Folders */
+  //   The root of your project, i.e. where "package.json" lives. Default is '..'
+  // root = file("../")
+  //   The folder where the react-native NPM package is. Default is ../node_modules/react-native
+  // reactNativeDir = file("../node_modules/react-native")
+  //   The folder where the react-native Codegen package is. Default is ../node_modules/@react-native/codegen
+  // codegenDir = file("../node_modules/@react-native/codegen")
+  //   The cli.js file which is the React Native CLI entrypoint. Default is ../node_modules/react-native/cli.js
+  // cliFile = file("../node_modules/react-native/cli.js")
+  /* Variants */
+  //   The list of variants to that are debuggable. For those we're going to
+  //   skip the bundling of the JS bundle and the assets. By default is just 'debug'.
+  //   If you add flavors like lite, prod, etc. you'll have to list your debuggableVariants.
+  // debuggableVariants = ["liteDebug", "prodDebug"]
+  /* Bundling */
+  //   A list containing the node command and its flags. Default is just 'node'.
+  // nodeExecutableAndArgs = ["node"]
+  //
+  //   The command to run when bundling. By default is 'bundle'
+  // bundleCommand = "ram-bundle"
+  //
+  //   The path to the CLI configuration file. Default is empty.
+  // bundleConfig = file(../rn-cli.config.js)
+  //
+  //   The name of the generated asset file containing your JS bundle
+  // bundleAssetName = "MyApplication.android.bundle"
+  //
+  //   The entry file for bundle generation. Default is 'index.android.js' or 'index.js'
+  // entryFile = file("../js/MyApplication.android.js")
+  //
+  //   A list of extra flags to pass to the 'bundle' commands.
+  //   See https://github.com/react-native-community/cli/blob/main/docs/commands.md#bundle
+  // extraPackagerArgs = []
+  /* Hermes Commands */
+  //   The hermes compiler command to run. By default it is 'hermesc'
+  // hermesCommand = "$rootDir/my-custom-hermesc/bin/hermesc"
+  //
+  //   The list of flags to pass to the Hermes compiler. By default is "-O", "-output-source-map"
+  // hermesFlags = ["-O", "-output-source-map"]
 }
 
 /**
@@ -100,41 +100,19 @@ android {
       proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
     }
   }
-
-  repositories {
-    flatDir {
-      dirs 'libs'
-    }
-  }
-  packagingOptions {
-    pickFirst 'lib/x86/libc++_shared.so'
-    pickFirst 'lib/x86_64/libc++_shared.so'
-    pickFirst 'lib/armeabi-v7a/libc++_shared.so'
-    pickFirst 'lib/arm64-v8a/libc++_shared.so'
-  }
 }
 
 dependencies {
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
   // The version of react-native is set by the React Native Gradle Plugin
   implementation("com.facebook.react:react-android")
 
-  implementation "com.facebook.react:react-native:+"  // From node_modules
-  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-
-    debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
-    exclude group: 'com.facebook.fbjni'
-  }
-
+  debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
   debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
-    exclude group: 'com.facebook.flipper'
     exclude group: 'com.squareup.okhttp3', module: 'okhttp'
   }
 
   debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}")
-
   if (hermesEnabled.toBoolean()) {
     implementation("com.facebook.react:hermes-android")
   } else {
@@ -143,16 +121,3 @@ dependencies {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
-
-configurations.all {
-  resolutionStrategy {
-    // There's a bug in soloader 0.8.0, which is the default in React
-    // Native 0.62, that causes it to try to load ARM libraries in API 30
-    // Android emulators. It's fixed in SoLoader 0.8.1. See:
-    // https://github.com/facebook/SoLoader/issues/55
-    // https://github.com/facebook/SoLoader/issues/59
-    // https://github.com/facebook/react-native/issues/28489
-    force "com.facebook.soloader:soloader:0.10.3"
-  }
-}
-

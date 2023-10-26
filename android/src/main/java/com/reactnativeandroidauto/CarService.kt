@@ -9,6 +9,7 @@ import com.facebook.react.ReactInstanceManager
 class CarService : CarAppService() {
   private lateinit var reactInstanceManager: ReactInstanceManager
   override fun onCreate() {
+    super.onCreate()
     reactInstanceManager =
       (application as ReactApplication).reactNativeHost.reactInstanceManager
   }
