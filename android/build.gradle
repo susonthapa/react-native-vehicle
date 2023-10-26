@@ -20,6 +20,7 @@ def isNewArchitectureEnabled() {
 
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
 
 if (isNewArchitectureEnabled()) {
   apply plugin: "com.facebook.react"
@@ -93,6 +94,10 @@ dependencies {
 
   implementation "androidx.car.app:app-projected:1.2.0"
   implementation "androidx.car.app:app:1.2.0"
+
+  // Moshi
+  implementation("com.squareup.moshi:moshi:1.14.0")
+  kapt("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
 }
 
 
