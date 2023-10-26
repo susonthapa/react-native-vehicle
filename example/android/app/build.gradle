@@ -72,9 +72,9 @@ android {
 
   compileSdkVersion rootProject.ext.compileSdkVersion
 
-  namespace "com.example.reactnativeandroidauto"
+  namespace "com.example.reactnativevehicle"
   defaultConfig {
-    applicationId "com.example.reactnativeandroidauto"
+    applicationId "com.example.reactnativevehicle"
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
     versionCode 1

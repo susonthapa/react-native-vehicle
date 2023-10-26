@@ -161,8 +161,8 @@ interface NavigationTemplate extends CommonAttributes {
 interface Screen extends CommonAttributes {
   type: "screen";
   name: string;
-  render: (props?: any) => React.ReactElement<AndroidAutoTemplate>;
-  children: AndroidAutoTemplate[] | AndroidAutoTemplate;
+  render: (props?: any) => React.ReactElement<VehicleTemplate>;
+  children: VehicleTemplate[] | VehicleTemplate;
 }
 
 interface ScreenManager extends CommonAttributes {
@@ -170,24 +170,24 @@ interface ScreenManager extends CommonAttributes {
   children: Screen[];
 }
 
-export type AndroidAutoTemplate =
+export type VehicleTemplate =
   | PaneTemplate
   | ListTemplate
   | GridTemplate
   | NavigationTemplate
   | PlaceListMapTemplate;
 
-export type ExtractElementByType<Type extends AndroidAutoElement["type"]> =
-  Extract<AndroidAutoElement, { type: Type }>;
-export type AndroidAutoElement =
-  | AndroidAutoTemplate
+export type ExtractElementByType<Type extends VehicleElement["type"]> =
+  Extract<VehicleElement, { type: Type }>;
+export type VehicleElement =
+  | VehicleTemplate
   | Row
   | GridItem
   | ItemList
   | ScreenManager
   | Screen
   | Action;
-export type ElementType = AndroidAutoElement["type"];
+export type ElementType = VehicleElement["type"];
 export interface Route {
   name: string;
   routeParams?: any;
@@ -197,5 +197,5 @@ export interface RootContainer {
   type: "root-container";
   stack: Route[];
   prevStack: Route[];
-  children?: AndroidAutoElement[];
+  children?: VehicleElement[];
 }

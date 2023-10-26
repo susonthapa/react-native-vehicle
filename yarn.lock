@@ -4272,6 +4272,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:^4.14.186":
+  version: 4.14.200
+  resolution: "@types/lodash@npm:4.14.200"
+  checksum: 6471f8bb5da692a6ecf03a8da4935bfbc341e67ee9bcb4f5730bfacff0c367232548f0a01e8ac5ea18c6fe78fb085d502494e33ccb47a7ee87cbdee03b47d00d
+  languageName: node
+  linkType: hard
+
 "@types/minimist@npm:^1.2.0":
   version: 1.2.2
   resolution: "@types/minimist@npm:1.2.2"
@@ -4334,6 +4341,15 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: 0150a5520925ae009e49eb81e4ca528548ec118b95c363516362bba39ffc068f0df97c43e4543c10ac8f514a42e48cad312c9da49e37257c62180b36f921fa84
+  languageName: node
+  linkType: hard
+
+"@types/react-reconciler@npm:0.28.6":
+  version: 0.28.6
+  resolution: "@types/react-reconciler@npm:0.28.6"
+  dependencies:
+    "@types/react": "*"
+  checksum: 237a6fb47334bc44622c0fe1e43b1c671d6b503848f1363b9dfd485518a02be6f8584c0dd73088a158f64a960634914b22854789ae7672dab2e27525afa3aa65
   languageName: node
   linkType: hard
 
@@ -12243,55 +12259,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-android-auto-example@workspace:example":
-  version: 0.0.0-use.local
-  resolution: "react-native-android-auto-example@workspace:example"
-  dependencies:
-    "@babel/core": ^7.20.0
-    "@babel/preset-env": ^7.20.0
-    "@babel/runtime": ^7.20.0
-    "@react-native/metro-config": ^0.72.11
-    babel-plugin-module-resolver: ^5.0.0
-    metro-react-native-babel-preset: 0.76.8
-    pod-install: ^0.1.0
-    react: 18.2.0
-    react-native: 0.72.6
-  languageName: unknown
-  linkType: soft
-
-"react-native-android-auto@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "react-native-android-auto@workspace:."
-  dependencies:
-    "@commitlint/config-conventional": ^17.0.2
-    "@evilmartians/lefthook": ^1.5.0
-    "@react-native/eslint-config": ^0.72.2
-    "@release-it/conventional-changelog": ^5.0.0
-    "@types/jest": ^28.1.2
-    "@types/react": ~17.0.21
-    "@types/react-native": 0.70.0
-    commitlint: ^17.0.2
-    del-cli: ^5.0.0
-    eslint: ^8.4.1
-    eslint-config-prettier: ^8.5.0
-    eslint-plugin-prettier: ^4.0.0
-    jest: ^28.1.1
-    lodash: ^4.17.20
-    pod-install: ^0.1.0
-    prettier: ^2.0.5
-    react: 18.2.0
-    react-native: 0.72.6
-    react-native-builder-bob: ^0.20.0
-    react-reconciler: 0.29.0
-    release-it: ^15.0.0
-    turbo: ^1.10.7
-    typescript: ^5.0.2
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  languageName: unknown
-  linkType: soft
-
 "react-native-builder-bob@npm:^0.20.0":
   version: 0.20.4
   resolution: "react-native-builder-bob@npm:0.20.4"
@@ -12324,6 +12291,57 @@ __metadata:
   checksum: 258da6ecd03be52cc05a3e3a7c481890c7c0b7b62ae9f263c5f3d6fafeae95bd9445ad2f6c2513f7f4e4569eee935a18ae94c7491f58d6916af515c88de9e0a1
   languageName: node
   linkType: hard
+
+"react-native-vehicle-example@workspace:example":
+  version: 0.0.0-use.local
+  resolution: "react-native-vehicle-example@workspace:example"
+  dependencies:
+    "@babel/core": ^7.20.0
+    "@babel/preset-env": ^7.20.0
+    "@babel/runtime": ^7.20.0
+    "@react-native/metro-config": ^0.72.11
+    babel-plugin-module-resolver: ^5.0.0
+    metro-react-native-babel-preset: 0.76.8
+    pod-install: ^0.1.0
+    react: 18.2.0
+    react-native: 0.72.6
+  languageName: unknown
+  linkType: soft
+
+"react-native-vehicle@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "react-native-vehicle@workspace:."
+  dependencies:
+    "@commitlint/config-conventional": ^17.0.2
+    "@evilmartians/lefthook": ^1.5.0
+    "@react-native/eslint-config": ^0.72.2
+    "@release-it/conventional-changelog": ^5.0.0
+    "@types/jest": ^28.1.2
+    "@types/lodash": ^4.14.186
+    "@types/react": ~17.0.21
+    "@types/react-native": 0.70.0
+    "@types/react-reconciler": 0.28.6
+    commitlint: ^17.0.2
+    del-cli: ^5.0.0
+    eslint: ^8.4.1
+    eslint-config-prettier: ^8.5.0
+    eslint-plugin-prettier: ^4.0.0
+    jest: ^28.1.1
+    lodash: ^4.17.20
+    pod-install: ^0.1.0
+    prettier: ^2.0.5
+    react: 18.2.0
+    react-native: 0.72.6
+    react-native-builder-bob: ^0.20.0
+    react-reconciler: 0.29.0
+    release-it: ^15.0.0
+    turbo: ^1.10.7
+    typescript: ^5.0.2
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  languageName: unknown
+  linkType: soft
 
 "react-native@npm:0.72.6":
   version: 0.72.6

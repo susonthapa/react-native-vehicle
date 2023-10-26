@@ -1,5 +1,5 @@
 {
-  "name": "react-native-android-auto",
+  "name": "react-native-vehicle",
   "version": "0.1.0",
   "description": "test",
   "main": "lib/commonjs/index",
@@ -26,7 +26,7 @@
     "!**/.*"
   ],
   "scripts": {
-    "example": "yarn workspace react-native-android-auto-example",
+    "example": "yarn workspace react-native-vehicle-example",
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
@@ -39,13 +39,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/susonthapa/react-native-android-auto",
+  "repository": "https://github.com/susonthapa/react-native-vehicle",
   "author": "Susan Thapa <susanthapa202@gmail.com> (https://susanthapa.com.np)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/susonthapa/react-native-android-auto/issues"
+    "url": "https://github.com/susonthapa/react-native-vehicle/issues"
   },
-  "homepage": "https://github.com/susonthapa/react-native-android-auto#readme",
+  "homepage": "https://github.com/susonthapa/react-native-vehicle#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -59,8 +59,10 @@
     "@react-native/eslint-config": "^0.72.2",
     "@release-it/conventional-changelog": "^5.0.0",
     "@types/jest": "^28.1.2",
+    "@types/lodash": "^4.14.186",
     "@types/react": "~17.0.21",
     "@types/react-native": "0.70.0",
+    "@types/react-reconciler": "0.28.6",
     "commitlint": "^17.0.2",
     "del-cli": "^5.0.0",
     "eslint": "^8.4.1",

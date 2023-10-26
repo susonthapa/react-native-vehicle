@@ -1,8 +1,8 @@
-@objc(AndroidAutoViewManager)
-class AndroidAutoViewManager: RCTViewManager {
+@objc(VehicleViewManager)
+class VehicleViewManager: RCTViewManager {
 
-  override func view() -> (AndroidAutoView) {
-    return AndroidAutoView()
+  override func view() -> (VehicleView) {
+    return VehicleView()
   }
 
   @objc override static func requiresMainQueueSetup() -> Bool {
@@ -10,7 +10,7 @@ class AndroidAutoViewManager: RCTViewManager {
   }
 }
 
-class AndroidAutoView : UIView {
+class VehicleView : UIView {
 
   @objc var color: String = "" {
     didSet {
