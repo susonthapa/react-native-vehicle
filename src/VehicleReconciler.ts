@@ -244,7 +244,7 @@ export function render(element: React.ReactNode) {
       root = Renderer.createContainer(containerInfo as any, 0, null, false, null, '', (error) => {
         console.log("ERROR: ", error);
       }, null);
-      console.log("Initializing AndroidAuto module");
+      console.log("Initializing Vehicle module");
       VehicleModule.init();
     }
 

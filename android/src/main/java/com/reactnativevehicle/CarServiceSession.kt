@@ -43,7 +43,7 @@ class CarServiceSession(private val reactInstanceManager: ReactInstanceManager) 
   private fun invokeStartTask(reactContext: ReactContext) {
     try {
       val catalystInstance = reactContext.catalystInstance
-      val jsAppModuleName = "androidAuto"
+      val jsAppModuleName = "vehicle"
       val appParams = WritableNativeMap()
       appParams.putDouble("rootTag", 1.0)
       val appProperties = Bundle.EMPTY

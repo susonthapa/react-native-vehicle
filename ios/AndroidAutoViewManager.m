@@ -1,6 +1,6 @@
 #import <React/RCTViewManager.h>
 
-@interface RCT_EXTERN_MODULE(AndroidAutoViewManager, RCTViewManager)
+@interface RCT_EXTERN_MODULE(VehicleViewManager, RCTViewManager)
 
 RCT_EXPORT_VIEW_PROPERTY(color, NSString)
 

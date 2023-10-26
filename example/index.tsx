@@ -4,12 +4,12 @@
 import React from 'react';
 import { AppRegistry } from 'react-native';
 import App from './src/App';
-import AndroidAuto from './src/AndroidAuto';
+import Vehicle from './src/Vehicle';
 
 import { render } from 'react-native-vehicle';
 
-AppRegistry.registerRunnable('androidAuto', () => {
-  render(React.createElement(AndroidAuto));
+AppRegistry.registerRunnable('vehicle', () => {
+  render(React.createElement(Vehicle));
 });
 
 AppRegistry.registerComponent('main', () => App);

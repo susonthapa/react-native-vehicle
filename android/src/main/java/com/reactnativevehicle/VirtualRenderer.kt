@@ -37,7 +37,7 @@ class VirtualRenderer(private val context: CarContext, private val moduleName: S
   private fun renderPresentation(container: SurfaceContainer) {
     val manager = context.getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
     val display = manager.createVirtualDisplay(
-      "AndroidAutoMapTemplate",
+      "VehicleMapTemplate",
       container.width,
       container.height,
       container.dpi,

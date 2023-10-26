@@ -184,12 +184,12 @@ const Main = () => {
   );
 };
 
-const AndroidAuto = () => {
+const Vehicle = () => {
 
   useEffect(() => {
-    console.log(`TODO: AndroidAuto mounting`);
+    console.log(`TODO: Vehicle mounting`);
     return () => {
-      console.log(`TODO: AndroidAuto unmounting`)
+      console.log(`TODO: Vehicle unmounting`)
     }
   }, [])
 
@@ -202,4 +202,4 @@ const AndroidAuto = () => {
   );
 };
 
-export default AndroidAuto;
+export default Vehicle;
