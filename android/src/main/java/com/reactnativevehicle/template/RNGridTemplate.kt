@@ -1,4 +1,4 @@
-package com.reactnativeandroidauto.template
+package com.reactnativevehicle.template
 
 import android.util.Log
 import androidx.car.app.CarContext
@@ -6,7 +6,7 @@ import androidx.car.app.model.GridItem
 import androidx.car.app.model.GridTemplate
 import androidx.car.app.model.ItemList
 import com.facebook.react.bridge.ReadableMap
-import com.reactnativeandroidauto.ReactCarRenderContext
+import com.reactnativevehicle.ReactCarRenderContext
 
 class RNGridTemplate(
   context: CarContext,

@@ -1,4 +1,4 @@
-package com.reactnativeandroidauto
+package com.reactnativevehicle
 
 import android.util.Log
 import androidx.car.app.CarContext

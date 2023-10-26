@@ -1,7 +1,7 @@
 import type React from "react";
-import type { AndroidAutoElement, ExtractElementByType } from "./types";
+import type { VehicleElement, ExtractElementByType } from "./types";
 
-type NativeToJSXElement<Type extends AndroidAutoElement["type"]> = Omit<
+type NativeToJSXElement<Type extends VehicleElement["type"]> = Omit<
   ExtractElementByType<Type>,
   "children" | "type"
 > & {

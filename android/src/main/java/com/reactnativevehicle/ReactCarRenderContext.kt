@@ -1,4 +1,4 @@
-package com.reactnativeandroidauto
+package com.reactnativevehicle
 
 import com.facebook.react.bridge.Callback
 

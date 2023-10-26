@@ -1,10 +1,10 @@
-package com.reactnativeandroidauto.template
+package com.reactnativevehicle.template
 
 import android.util.Log
 import androidx.car.app.CarContext
 import androidx.car.app.model.*
 import com.facebook.react.bridge.ReadableMap
-import com.reactnativeandroidauto.ReactCarRenderContext
+import com.reactnativevehicle.ReactCarRenderContext
 
 /**
  * Creates [PlaceListMapTemplate] from the given props

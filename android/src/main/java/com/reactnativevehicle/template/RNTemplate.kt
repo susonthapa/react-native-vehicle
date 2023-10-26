@@ -1,13 +1,11 @@
-package com.reactnativeandroidauto.template
+package com.reactnativevehicle.template
 
 import android.graphics.Bitmap
 import android.text.Spannable
 import android.text.SpannableString
-import android.text.SpannableStringBuilder
 import android.util.Log
 import androidx.car.app.CarContext
 import androidx.car.app.model.*
-import androidx.car.app.model.PlaceMarker.TYPE_IMAGE
 import androidx.core.graphics.drawable.IconCompat
 import com.facebook.common.references.CloseableReference
 import com.facebook.datasource.DataSources
@@ -17,7 +15,7 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableNativeMap
 import com.facebook.react.views.imagehelper.ImageSource
-import com.reactnativeandroidauto.ReactCarRenderContext
+import com.reactnativevehicle.ReactCarRenderContext
 
 /**
  * Base class for parsing the template based on the props passed from ReactNative

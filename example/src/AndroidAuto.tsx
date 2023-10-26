@@ -5,7 +5,7 @@ import {
   Screen,
   ScreenManager,
   useCarNavigation
-} from 'react-native-android-auto';
+} from 'react-native-vehicle';
 
 const DeliveryListScreen = () => {
   const navigation = useCarNavigation()
@@ -178,7 +178,7 @@ const Main = () => {
         remainingTimeSeconds: 60000,
       }}
 
-      id='test-android-auto'
+      id='test-vehicle'
       component={TestMap}
     />
   );

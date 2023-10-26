@@ -1,4 +1,4 @@
-package com.reactnativeandroidauto.template
+package com.reactnativevehicle.template
 
 import android.util.Log
 import androidx.car.app.CarContext
@@ -6,7 +6,7 @@ import androidx.car.app.model.Action
 import androidx.car.app.model.Pane
 import androidx.car.app.model.PaneTemplate
 import com.facebook.react.bridge.ReadableMap
-import com.reactnativeandroidauto.ReactCarRenderContext
+import com.reactnativevehicle.ReactCarRenderContext
 
 /**
  * Creates [PaneTemplate] from the given props

@@ -1,4 +1,4 @@
-export { Screen, ScreenManager, useCarNavigation } from "./AndroidAutoReact";
-export { render } from "./AndroidAutoReconciler";
-export { AndroidAutoModule } from "./AndroidAuto";
-import './android-auto.global';
+export { Screen, ScreenManager, useCarNavigation } from "./VehicleReact";
+export { render } from "./VehicleReconciler";
+export { VehicleModule } from "./Vehicle";
+import './vehicle.global';

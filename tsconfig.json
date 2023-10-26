@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "react-native-android-auto": ["./src/index"]
+      "react-native-vehicle": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

@@ -5,15 +5,15 @@ import { AppRegistry, DeviceEventEmitter } from "react-native";
 import {
   DefaultEventPriority
 } from 'react-reconciler/constants';
-import { AndroidAutoModule } from "./AndroidAuto";
-import { RootView } from "./AndroidAutoReact";
+import { VehicleModule } from "./Vehicle";
+import { RootView } from "./VehicleReact";
 import type {
-  AndroidAutoElement,
+  VehicleElement,
   ExtractElementByType,
   RootContainer
 } from "./types";
 
-type Container = RootContainer | AndroidAutoElement;
+type Container = RootContainer | VehicleElement;
 
 type ScreenContainer = ExtractElementByType<"screen">;
 
@@ -63,7 +63,7 @@ function insertBefore(
 const Renderer = Reconciler<
   Container,
   any,
-  AndroidAutoElement,
+  VehicleElement,
   any,
   any,
   any,
@@ -187,15 +187,15 @@ const Renderer = Reconciler<
       if (containerInfo.prevStack.length === 0) {
         console.log("Initial render of root");
       }
-      AndroidAutoModule.setTemplate(node.name, template);
+      VehicleModule.setTemplate(node.name, template);
     } else if (containerInfo.stack.length > containerInfo.prevStack.length) {
-      AndroidAutoModule.pushScreen(node.name, template);
+      VehicleModule.pushScreen(node.name, template);
     } else if (
       containerInfo.stack.length ===
       containerInfo.prevStack.length - 1
     ) {
-      AndroidAutoModule.popScreen();
-      AndroidAutoModule.setTemplate(node.name, template);
+      VehicleModule.popScreen();
+      VehicleModule.setTemplate(node.name, template);
     }
 
     containerInfo.prevStack = containerInfo.stack;
@@ -245,11 +245,11 @@ export function render(element: React.ReactNode) {
         console.log("ERROR: ", error);
       }, null);
       console.log("Initializing AndroidAuto module");
-      AndroidAutoModule.init();
+      VehicleModule.init();
     }
 
     Renderer.updateContainer(element as any, root, null, () => {
-      AndroidAutoModule.invalidate("root");
+      VehicleModule.invalidate("root");
     });
 
     if (!root) {

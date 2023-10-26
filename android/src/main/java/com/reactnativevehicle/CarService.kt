@@ -1,4 +1,4 @@
-package com.reactnativeandroidauto
+package com.reactnativevehicle
 
 import androidx.car.app.CarAppService
 import androidx.car.app.Session

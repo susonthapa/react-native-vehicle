@@ -1,4 +1,4 @@
-package com.reactnativeandroidauto
+package com.reactnativevehicle
 
 import android.content.Intent
 import android.net.Uri
@@ -14,7 +14,7 @@ import com.facebook.react.bridge.*
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
 import com.facebook.react.modules.debug.DevSettingsModule
-import com.reactnativeandroidauto.template.TemplateFactory
+import com.reactnativevehicle.template.TemplateFactory
 import java.util.*
 
 @ReactModule(name = AndroidAutoModule.MODULE_NAME)

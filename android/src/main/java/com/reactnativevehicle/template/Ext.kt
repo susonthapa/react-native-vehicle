@@ -1,4 +1,4 @@
-package com.reactnativeandroidauto.template
+package com.reactnativevehicle.template
 
 import com.facebook.react.bridge.ReadableMap
 

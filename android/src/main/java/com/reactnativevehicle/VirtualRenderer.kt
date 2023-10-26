@@ -1,4 +1,4 @@
-package com.reactnativeandroidauto
+package com.reactnativevehicle
 
 import android.app.Presentation
 import android.content.Context

@@ -6,7 +6,7 @@ import { AppRegistry } from 'react-native';
 import App from './src/App';
 import AndroidAuto from './src/AndroidAuto';
 
-import { render } from 'react-native-android-auto';
+import { render } from 'react-native-vehicle';
 
 AppRegistry.registerRunnable('androidAuto', () => {
   render(React.createElement(AndroidAuto));

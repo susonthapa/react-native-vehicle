@@ -1,13 +1,13 @@
 import { debounce, cloneDeepWith } from "lodash";
 import { NativeModules } from "react-native";
 
-import type { AndroidAutoTemplate } from "./types";
+import type { VehicleTemplate } from "./types";
 
 const invalidate = debounce((screenName: string) => {
   NativeModules.CarModule.invalidate(screenName);
 }, 50);
 
-function prepareTemplate(name: string, template: AndroidAutoTemplate) {
+function prepareTemplate(name: string, template: VehicleTemplate) {
   let currentIndex = 0;
   const callbacks = new Map<number, Function>();
 
@@ -33,7 +33,7 @@ function prepareTemplate(name: string, template: AndroidAutoTemplate) {
   return [name, templateClone, callbackFromNative] as const;
 }
 
-export const AndroidAutoModule = {
+export const VehicleModule = {
   init() {},
   mapNavigate(address: string) {
     NativeModules.CarModule.mapNavigate(address);
@@ -45,11 +45,11 @@ export const AndroidAutoModule = {
     NativeModules.CarModule.finishCarApp();
   },
   invalidate,
-  setTemplate: debounce((name: string, template: AndroidAutoTemplate) => {
+  setTemplate: debounce((name: string, template: VehicleTemplate) => {
     NativeModules.CarModule.setTemplate(...prepareTemplate(name, template));
     invalidate(name);
   }, 50),
-  pushScreen: (name: string, template: AndroidAutoTemplate) => {
+  pushScreen: (name: string, template: VehicleTemplate) => {
     NativeModules.CarModule.pushScreen(...prepareTemplate(name, template));
   },
   popScreen: () => {

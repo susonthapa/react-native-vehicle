@@ -1,11 +1,11 @@
-package com.reactnativeandroidauto.template
+package com.reactnativevehicle.template
 
 import androidx.car.app.CarContext
 import androidx.car.app.model.Pane
 import androidx.car.app.model.PaneTemplate
 import androidx.car.app.model.Template
 import com.facebook.react.bridge.ReadableMap
-import com.reactnativeandroidauto.ReactCarRenderContext
+import com.reactnativevehicle.ReactCarRenderContext
 
 /**
  * Factory to create [Template]

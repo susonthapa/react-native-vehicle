@@ -1,11 +1,11 @@
-package com.reactnativeandroidauto.template
+package com.reactnativevehicle.template
 
 import android.util.Log
 import androidx.car.app.CarContext
 import androidx.car.app.model.DateTimeWithZone
 import androidx.car.app.navigation.model.*
 import com.facebook.react.bridge.ReadableMap
-import com.reactnativeandroidauto.ReactCarRenderContext
+import com.reactnativevehicle.ReactCarRenderContext
 import java.util.*
 
 /**

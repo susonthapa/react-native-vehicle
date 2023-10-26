@@ -1,4 +1,4 @@
-package com.example.reactnativeandroidauto
+package com.example.reactnativevehicle
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
