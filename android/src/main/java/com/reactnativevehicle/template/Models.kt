@@ -55,13 +55,13 @@ data class VHDistance(
 
 data class VHDateTimeWithZone(
   val id: String,
-  val timeSinceEpochMillis: Int
+  val timeSinceEpochMillis: Long
 ) : Codable
 
 data class VHTravelEstimate(
   val remainingDistance: VHDistance,
   val destinationTime: VHDateTimeWithZone,
-  val remainingTimeSeconds: Int
+  val remainingTimeSeconds: Long
 ) : Codable
 
 data class VHSectionedItemList(
@@ -75,19 +75,19 @@ data class VHRoutingInfo(
   val step: VHStep,
   val isLoading: Boolean,
   val distance: VHDistance,
-  val junctionImage: String?,
+  val junctionImage: VHIcon?,
   val nextStep: VHStep?
 ) : Codable, VHNavigationInfo
 
 data class VHMessageInfo(
   val title: String,
-  val icon: String?
+  val icon: VHIcon?
 ) : Codable, VHNavigationInfo
 
 data class VHStep(
   val lane: VHLane,
   val cue: String?,
-  val lanesImage: String?,
+  val lanesImage: VHIcon?,
   val maneuver: VHManeuver,
   val road: String?
 ) : Codable
@@ -99,8 +99,8 @@ data class VHLane(
 
 data class VHManeuver(
   val type: Int,
-  val icon: String,
-  val roundaboutExitAngle: Double,
+  val icon: VHIcon,
+  val roundaboutExitAngle: Int,
   val roundaboutExitNumber: Int
 ) : Codable
 
