@@ -63,6 +63,11 @@ data class VHTravelEstimate(
   val remainingTimeSeconds: Int
 ) : Codable
 
+data class VHSectionedItemList(
+  val header: String,
+  val children: VHItemList
+) : Codable
+
 interface VHNavigationInfo
 
 data class VHRoutingInfo(
@@ -113,7 +118,7 @@ data class VHList(
   val isLoading: Boolean?,
   val headerAction: Int?,
   val actionStrip: VHActionStrip?,
-  val children: List<VHItemList>,
+  val children: List<VHSectionedItemList>,
 ) : Codable
 
 // PlaceListMap Template
