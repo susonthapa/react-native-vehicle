@@ -128,11 +128,11 @@ data class VHPlaceListMapTemplate(
   val headerAction: Int?,
   val isLoading: Boolean?,
   val actionStrip: VHActionStrip?,
-  val children: List<VHRow>
+  val children: VHItemList
+  // TODO(add Place)
 ) : Codable
 
 // Pan Template
-
 data class VHPane(
   val isLoading: Boolean?,
   val children: List<VHRow>,
