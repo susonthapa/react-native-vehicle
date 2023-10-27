@@ -13,7 +13,7 @@ class RNGridTemplate(
   renderContext: ReactCarRenderContext,
 ) : RNTemplate(context, renderContext) {
   override fun parse(props: ReadableMap): GridTemplate {
-    val grid = props.decode<VHGrid>()!!
+    val grid = props.decode<VHGridTemplate>()!!
     return GridTemplate.Builder().apply {
       grid.isLoading?.let { setLoading(it) }
       grid.title?.let { setTitle(it) }

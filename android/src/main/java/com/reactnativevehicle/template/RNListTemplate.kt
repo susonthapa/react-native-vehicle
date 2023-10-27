@@ -24,7 +24,7 @@ class RNListTemplate(
 ) : RNTemplate(context, renderContext) {
 
   override fun parse(props: ReadableMap): ListTemplate {
-    val list = props.decode<VHList>()!!
+    val list = props.decode<VHListTemplate>()!!
     val builder = ListTemplate.Builder()
     builder.setTitle(list.title)
     list.isLoading?.let { builder.setLoading(it) }

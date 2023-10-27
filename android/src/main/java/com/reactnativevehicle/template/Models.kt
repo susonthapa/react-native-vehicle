@@ -29,7 +29,8 @@ data class VHRow(
   val texts: List<String>?,
   val image: VHIcon?,
   val onPress: Int?,
-  val metadata: VHPlaceMetadata?,
+  // TODO(Fix this)
+  val metadata: VHMetadata?,
 ) : Codable, VHItem
 
 data class VHGridItem(
@@ -40,7 +41,7 @@ data class VHGridItem(
   val onPress: Int?
 ) : Codable, VHItem
 
-data class VHPlaceMetadata(
+data class VHMetadata(
   val distance: VHDistance,
   val icon: String,
   val latitude: Double,
@@ -104,7 +105,7 @@ data class VHManeuver(
 ) : Codable
 
 // Grid Template
-data class VHGrid(
+data class VHGridTemplate(
   val isLoading: Boolean?,
   val title: String?,
   val headerAction: Int?,
@@ -113,7 +114,7 @@ data class VHGrid(
 ) : Codable
 
 // List Template
-data class VHList(
+data class VHListTemplate(
   val title: String,
   val isLoading: Boolean?,
   val headerAction: Int?,
@@ -122,7 +123,7 @@ data class VHList(
 ) : Codable
 
 // PlaceListMap Template
-data class VHPlaceListMap(
+data class VHPlaceListMapTemplate(
   val title: String,
   val headerAction: Int?,
   val isLoading: Boolean?,
@@ -131,15 +132,23 @@ data class VHPlaceListMap(
 ) : Codable
 
 // Pan Template
+
 data class VHPane(
-  val title: String,
+  val isLoading: Boolean?,
+  val children: List<VHRow>,
+  val actionList: List<VHAction>?,
+  val image: VHIcon?
+) : Codable
+
+data class VHPaneTemplate(
+  val title: String?,
   val headerAction: Int?,
   val actionStrip: VHActionStrip?,
-  val children: List<VHItemList>
+  val children: VHPane
 ) : Codable
 
 // Navigation Template
-data class VHNavigation(
+data class VHNavigationTemplate(
   val id: String,
   val actionStrip: VHActionStrip?,
   val mapActionStrip: VHActionStrip?,

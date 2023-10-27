@@ -7,6 +7,7 @@ import androidx.car.app.model.CarColor
 import androidx.car.app.model.CarIcon
 import androidx.car.app.model.GridItem
 import androidx.car.app.model.ItemList
+import androidx.car.app.model.Row
 import androidx.core.graphics.drawable.IconCompat
 import com.facebook.common.references.CloseableReference
 import com.facebook.datasource.DataSources
@@ -22,6 +23,7 @@ import com.reactnativevehicle.template.VHActionStrip
 import com.reactnativevehicle.template.VHGridItem
 import com.reactnativevehicle.template.VHIcon
 import com.reactnativevehicle.template.VHItemList
+import com.reactnativevehicle.template.VHRow
 
 fun ReadableMap.isLoading(): Boolean {
   return try {
@@ -104,6 +106,16 @@ fun VHItemList.toItemList(context: Context, renderContext: ReactCarRenderContext
       builder.addItem(it.toGridItem(context, renderContext))
     }
   }
+
+  return builder.build()
+}
+
+fun VHRow.toRow(context: Context, renderContext: ReactCarRenderContext): Row {
+  val builder = Row.Builder()
+  builder.setTitle(title)
+  texts?.forEach { builder.addText(it) }
+  image?.let { builder.setImage(it.toCarIcon(context)) }
+  onPress?.let { builder.setOnClickListener { renderContext.invokeCallback(it) } }
 
   return builder.build()
 }
