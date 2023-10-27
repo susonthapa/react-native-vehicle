@@ -112,7 +112,7 @@ class RNNavigationTemplate(
   override fun parse(props: ReadableMap): NavigationTemplate {
     val navigationProps = props.decode<VHNavigationTemplate>()!!
     val builder = NavigationTemplate.Builder()
-    navigationProps.actionStrip?.let {
+    navigationProps.actionStrip.let {
       builder.setActionStrip(
         it.toActionStrip(
           context,

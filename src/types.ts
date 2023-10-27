@@ -1,5 +1,6 @@
 import type React from "react";
 import type { ImageResolvedAssetSource } from "react-native";
+import { SectionList } from "react-native";
 
 type HeaderAction = "back" | "app_icon";
 type CarColor =
@@ -21,10 +22,6 @@ interface PlaceMetadata {
 
 interface ActionStrip {
   actions: Omit<Action, "type">[];
-}
-
-type MapActionStrip = {
-  actions: (Omit<Action, "type" | "title" | "icon"> & { icon: NonNullable<Action['icon']> })[],
 }
 
 type Step = {
@@ -49,6 +46,7 @@ type Distance = {
 }
 
 type RoutingInfo = {
+  type: "routingInfo",
   step: Step,
   isLoading: boolean,
   distance: Distance,
@@ -57,13 +55,9 @@ type RoutingInfo = {
 }
 
 type MessageInfo = {
+  type: "messageInfo",
   title: string,
   icon?: ImageResolvedAssetSource,
-}
-
-type NavigationInfo = {
-  type: 'routingInfo' | 'messageInfo',
-  info: RoutingInfo | MessageInfo,
 }
 
 type TravelEstimate = {
@@ -100,6 +94,7 @@ interface Row extends CommonAttributes {
 
 interface GridItem extends CommonAttributes {
   type: "grid-item",
+  isLoading?: boolean,
   title: string,
   text?: string,
   image?: ImageResolvedAssetSource,
@@ -108,27 +103,32 @@ interface GridItem extends CommonAttributes {
 
 interface ItemList extends CommonAttributes {
   type: "item-list";
-  header: string;
-  children: Row[];
+  noItemMessage?: string,
+  children: (GridItem | Row)[];
+}
+
+interface SectionedItemList extends CommonAttributes {
+  type: "sectioned-item-list"
+  header: string,
+  children: ItemList
 }
 
 interface ListTemplate extends CommonAttributes {
   type: "list-template";
   title: string;
-  headerAction?: HeaderAction;
   isLoading?: boolean;
+  headerAction?: HeaderAction;
   actionStrip?: ActionStrip;
-  children: ItemList[];
+  children: SectionedItemList[];
 }
 
 interface GridTemplate extends CommonAttributes {
   type: "grid-template",
   isLoading?: boolean,
   title?: string,
-  noItemMessage?: string,
   headerAction?: HeaderAction,
   actionStrip?: ActionStrip,
-  children: GridItem[],
+  children: ItemList,
 }
 
 interface PlaceListMapTemplate extends CommonAttributes {
@@ -137,7 +137,15 @@ interface PlaceListMapTemplate extends CommonAttributes {
   headerAction?: HeaderAction;
   isLoading?: boolean;
   actionStrip?: ActionStrip;
-  children: Row[];
+  children: ItemList;
+}
+
+interface Pane extends CommonAttributes {
+  type: "pane"
+  isLoading?: boolean,
+  actionList?: Action[],
+  image?: ImageResolvedAssetSource
+  children: Row[]
 }
 
 interface PaneTemplate extends CommonAttributes {
@@ -145,15 +153,15 @@ interface PaneTemplate extends CommonAttributes {
   title: string;
   headerAction?: HeaderAction;
   actionStrip?: ActionStrip;
-  children: ItemList[];
+  children: Pane;
 }
 
 interface NavigationTemplate extends CommonAttributes {
   type: "navigation-template",
   id: string,
   actionStrip: ActionStrip,
-  mapActionStrip?: MapActionStrip,
-  navigationInfo?: NavigationInfo,
+  mapActionStrip?: ActionStrip,
+  navigationInfo?: RoutingInfo | MessageInfo,
   destinationTravelEstimate?: TravelEstimate,
   component: React.ComponentType<any>,
 }
@@ -186,7 +194,9 @@ export type VehicleElement =
   | ItemList
   | ScreenManager
   | Screen
-  | Action;
+  | Pane
+  | Action
+  | SectionedItemList;
 export type ElementType = VehicleElement["type"];
 export interface Route {
   name: string;
