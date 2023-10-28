@@ -5,6 +5,7 @@ import androidx.car.app.model.GridTemplate
 import com.facebook.react.bridge.ReadableMap
 import com.reactnativevehicle.ReactCarRenderContext
 import com.reactnativevehicle.ext.decode
+import com.reactnativevehicle.ext.toAction
 import com.reactnativevehicle.ext.toActionStrip
 import com.reactnativevehicle.ext.toItemList
 
@@ -17,10 +18,11 @@ class RNGridTemplate(
     return GridTemplate.Builder().apply {
       grid.isLoading?.let { setLoading(it) }
       grid.title?.let { setTitle(it) }
-      // TODO(Fix this)
-//      grid.headerAction?.let { setHeaderAction(Action()) }
-      setActionStrip(grid.actionStrip.toActionStrip(context, renderContext))
-      setSingleList(grid.children.toItemList(context, renderContext))
+      grid.headerAction?.let { setHeaderAction(it.toAction(context, renderContext)) }
+      grid.actionStrip?.let { setActionStrip(it.toActionStrip(context, renderContext)) }
+      if (grid.children.isNotEmpty()) {
+        setSingleList(grid.children.first().toItemList(context, renderContext))
+      }
     }.build()
   }
 

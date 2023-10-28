@@ -5,6 +5,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class VHAction(
+  val actionType: Int?,
   val title: String?,
   val icon: VHIcon?,
   val backgroundColor: Int?,
@@ -80,7 +81,7 @@ data class VHTravelEstimate(
 @JsonClass(generateAdapter = true)
 data class VHSectionedItemList(
   val header: String,
-  val children: VHItemList
+  val children: List<VHItemList>
 ) : Codable
 
 interface VHNavigationInfo
@@ -130,9 +131,9 @@ data class VHManeuver(
 data class VHGridTemplate(
   val isLoading: Boolean?,
   val title: String?,
-  val headerAction: Int?,
-  val actionStrip: VHActionStrip,
-  val children: VHItemList
+  val headerAction: VHAction?,
+  val actionStrip: VHActionStrip?,
+  val children: List<VHItemList>
 ) : Codable
 
 // List Template
@@ -140,7 +141,7 @@ data class VHGridTemplate(
 data class VHListTemplate(
   val title: String,
   val isLoading: Boolean?,
-  val headerAction: Int?,
+  val headerAction: VHAction?,
   val actionStrip: VHActionStrip?,
   val children: List<VHSectionedItemList>,
 ) : Codable
@@ -149,10 +150,10 @@ data class VHListTemplate(
 @JsonClass(generateAdapter = true)
 data class VHPlaceListMapTemplate(
   val title: String,
-  val headerAction: Int?,
+  val headerAction: VHAction?,
   val isLoading: Boolean?,
   val actionStrip: VHActionStrip?,
-  val children: VHItemList
+  val children: List<VHItemList>
   // TODO(add Place)
 ) : Codable
 
@@ -168,9 +169,9 @@ data class VHPane(
 @JsonClass(generateAdapter = true)
 data class VHPaneTemplate(
   val title: String?,
-  val headerAction: Int?,
+  val headerAction: VHAction?,
   val actionStrip: VHActionStrip?,
-  val children: VHPane
+  val children: List<VHPane>
 ) : Codable
 
 // Navigation Template

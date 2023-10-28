@@ -54,6 +54,19 @@ fun Int.toCarColor(): CarColor {
 }
 
 fun VHAction.toAction(context: Context, renderContext: ReactCarRenderContext): Action {
+  when (actionType) {
+    1 -> {
+      return Action.APP_ICON
+    }
+
+    2 -> {
+      return Action.BACK
+    }
+
+    3 -> {
+      return Action.PAN
+    }
+  }
   val builder = Action.Builder()
   title?.let { builder.setTitle(it) }
   icon?.let { builder.setIcon(it.toCarIcon(context)) }

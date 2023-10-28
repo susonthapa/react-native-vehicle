@@ -5,6 +5,7 @@ import androidx.car.app.model.PlaceListMapTemplate
 import com.facebook.react.bridge.ReadableMap
 import com.reactnativevehicle.ReactCarRenderContext
 import com.reactnativevehicle.ext.decode
+import com.reactnativevehicle.ext.toAction
 import com.reactnativevehicle.ext.toActionStrip
 import com.reactnativevehicle.ext.toItemList
 
@@ -26,10 +27,12 @@ class RNPlaceListMapTemplate(
     val placeList = props.decode<VHPlaceListMapTemplate>()!!
     val builder = PlaceListMapTemplate.Builder()
     builder.setTitle(placeList.title)
-    // TODO(HeaderAction)
+    placeList.headerAction?.let { builder.setHeaderAction(it.toAction(context, renderContext)) }
     placeList.isLoading?.let { builder.setLoading(it) }
     placeList.actionStrip?.let { builder.setActionStrip(it.toActionStrip(context, renderContext)) }
-    builder.setItemList(placeList.children.toItemList(context, renderContext))
+    if (placeList.children.isNotEmpty()) {
+      builder.setItemList(placeList.children.first().toItemList(context, renderContext))
+    }
     return builder.build()
   }
 

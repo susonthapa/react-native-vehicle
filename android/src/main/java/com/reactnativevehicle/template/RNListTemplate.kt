@@ -6,6 +6,7 @@ import androidx.car.app.model.SectionedItemList
 import com.facebook.react.bridge.ReadableMap
 import com.reactnativevehicle.ReactCarRenderContext
 import com.reactnativevehicle.ext.decode
+import com.reactnativevehicle.ext.toAction
 import com.reactnativevehicle.ext.toActionStrip
 import com.reactnativevehicle.ext.toItemList
 
@@ -29,10 +30,10 @@ class RNListTemplate(
     builder.setTitle(list.title)
     list.isLoading?.let { builder.setLoading(it) }
     list.actionStrip?.let { builder.setActionStrip(it.toActionStrip(context, renderContext)) }
-    // TODO(Header Action)
+    list.headerAction?.let { builder.setHeaderAction(it.toAction(context, renderContext)) }
     list.children.forEach {
       builder.addSectionedList(
-        SectionedItemList.create(it.children.toItemList(context, renderContext), it.header),
+        SectionedItemList.create(it.children.first().toItemList(context, renderContext), it.header),
       )
     }
 

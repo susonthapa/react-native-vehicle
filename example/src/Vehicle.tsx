@@ -6,6 +6,7 @@ import {
   ScreenManager,
   useCarNavigation
 } from 'react-native-vehicle';
+import { ActionType } from '../../src/types';
 
 const DeliveryListScreen = () => {
   const navigation = useCarNavigation()
@@ -75,13 +76,15 @@ const GridMenu = () => {
     return () => console.log('TODO: unmounting GridMenu')
   }, [])
   return (
-    <grid-template title='Grid Menus' headerAction={'back'}>
-      <grid-item title='Menu One' image={Image.resolveAssetSource(require('./images/gear.png'))} />
-      <grid-item title='Awesome Title' image={Image.resolveAssetSource(require('./images/gear.png'))} />
-      <grid-item title='Another Menu' image={Image.resolveAssetSource(require('./images/gear.png'))} />
-      <grid-item title='Test Menu' image={Image.resolveAssetSource(require('./images/gear.png'))} />
-      <grid-item title='Food Menu' image={Image.resolveAssetSource(require('./images/gear.png'))} />
-      <grid-item title='Settings Menu' image={Image.resolveAssetSource(require('./images/gear.png'))} />
+    <grid-template title='Grid Menus' headerAction={{ actionType: ActionType.BACK }}>
+      <item-list>
+        <grid-item title='Menu One' image={Image.resolveAssetSource(require('./images/gear.png'))} />
+        <grid-item title='Awesome Title' image={Image.resolveAssetSource(require('./images/gear.png'))} />
+        <grid-item title='Another Menu' image={Image.resolveAssetSource(require('./images/gear.png'))} />
+        <grid-item title='Test Menu' image={Image.resolveAssetSource(require('./images/gear.png'))} />
+        <grid-item title='Food Menu' image={Image.resolveAssetSource(require('./images/gear.png'))} />
+        <grid-item title='Settings Menu' image={Image.resolveAssetSource(require('./images/gear.png'))} />
+      </item-list>
     </grid-template>
   )
 }

@@ -27,7 +27,7 @@ class RNPaneTemplate(
 
   override fun parse(props: ReadableMap): PaneTemplate {
     val pane = props.decode<VHPaneTemplate>()!!
-    val paneChildren = pane.children
+    val paneChildren = pane.children.first()
     val paneBuilder = Pane.Builder()
 
     paneChildren.isLoading?.let { paneBuilder.setLoading(it) }
@@ -41,7 +41,7 @@ class RNPaneTemplate(
 
     val builder = PaneTemplate.Builder(paneBuilder.build())
     pane.title?.let { builder.setTitle(it) }
-    // TODO(Fix headerAction)
+    pane.headerAction?.let { builder.setHeaderAction(it.toAction(context, renderContext)) }
     pane.actionStrip?.let { builder.setActionStrip(it.toActionStrip(context, renderContext)) }
     return builder.build()
   }

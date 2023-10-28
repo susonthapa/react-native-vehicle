@@ -1,8 +1,6 @@
 import type React from "react";
 import type { ImageResolvedAssetSource } from "react-native";
-import { SectionList } from "react-native";
 
-type HeaderAction = "back" | "app_icon";
 type CarColor =
   | "blue"
   | "green"
@@ -75,8 +73,20 @@ interface CommonAttributes {
   key?: string | number;
 }
 
+export enum ActionType {
+  CUSTOM,
+  APP_ICON,
+  BACK,
+  PAN
+}
+
+type HeaderAction = {
+  actionType: ActionType.BACK | ActionType.APP_ICON
+}
+
 interface Action extends CommonAttributes {
   type: "action";
+  actionType?: ActionType,
   title?: string;
   icon?: ImageResolvedAssetSource;
   backgroundColor?: CarColor;
@@ -128,7 +138,7 @@ interface GridTemplate extends CommonAttributes {
   title?: string,
   headerAction?: HeaderAction,
   actionStrip?: ActionStrip,
-  children: ItemList,
+  children: ItemList & { children: GridItem[] },
 }
 
 interface PlaceListMapTemplate extends CommonAttributes {
