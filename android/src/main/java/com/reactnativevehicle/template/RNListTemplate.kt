@@ -1,10 +1,14 @@
 package com.reactnativevehicle.template
 
-import android.util.Log
 import androidx.car.app.CarContext
-import androidx.car.app.model.*
+import androidx.car.app.model.ListTemplate
+import androidx.car.app.model.SectionedItemList
 import com.facebook.react.bridge.ReadableMap
 import com.reactnativevehicle.ReactCarRenderContext
+import com.reactnativevehicle.ext.decode
+import com.reactnativevehicle.ext.toAction
+import com.reactnativevehicle.ext.toActionStrip
+import com.reactnativevehicle.ext.toItemList
 
 /**
  * Creates a [ListTemplate] from the given props
@@ -21,43 +25,18 @@ class RNListTemplate(
 ) : RNTemplate(context, renderContext) {
 
   override fun parse(props: ReadableMap): ListTemplate {
-    val children = props.getArray("children")
-    val childrenCount = children?.size() ?: 0
-    val loading: Boolean = try {
-      props.getBoolean("isLoading")
-    } catch (e: Exception) {
-      childrenCount == 0
-    }
+    val list = props.decode<VHListTemplate>()!!
     val builder = ListTemplate.Builder()
-    builder.setLoading(loading)
-    if (!loading) {
-      for (i in 0 until childrenCount) {
-        val child = children!!.getMap(i)
-        val type = child.getString("type")
-        if (type == "item-list") {
-          builder.addSectionedList(
-            SectionedItemList.create(
-              parseItemListChildren(child.getMap("children")!!),
-              child.getString("header")!!,
-            )
-          )
-        } else {
-          Log.w(TAG, "parse: please pass children of type item-list, got $type")
-        }
-      }
+    builder.setTitle(list.title)
+    list.isLoading?.let { builder.setLoading(it) }
+    list.actionStrip?.let { builder.setActionStrip(it.toActionStrip(context, renderContext)) }
+    list.headerAction?.let { builder.setHeaderAction(it.toAction(context, renderContext)) }
+    list.children.forEach {
+      builder.addSectionedList(
+        SectionedItemList.create(it.children.first().toItemList(context, renderContext), it.header),
+      )
     }
-    try {
-      builder.setHeaderAction(getHeaderAction(props.getString("headerAction"))!!)
-    } catch (e: Exception) {
-      e.printStackTrace()
-    }
-    try {
-      val actionStripMap = props.getMap("actionStrip")
-      builder.setActionStrip(parseActionStrip(actionStripMap!!))
-    } catch (e: Exception) {
-      e.printStackTrace()
-    }
-    builder.setTitle(props.getString("title")!!)
+
     return builder.build()
   }
 

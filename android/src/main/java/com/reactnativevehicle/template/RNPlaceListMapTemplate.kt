@@ -1,10 +1,13 @@
 package com.reactnativevehicle.template
 
-import android.util.Log
 import androidx.car.app.CarContext
-import androidx.car.app.model.*
+import androidx.car.app.model.PlaceListMapTemplate
 import com.facebook.react.bridge.ReadableMap
 import com.reactnativevehicle.ReactCarRenderContext
+import com.reactnativevehicle.ext.decode
+import com.reactnativevehicle.ext.toAction
+import com.reactnativevehicle.ext.toActionStrip
+import com.reactnativevehicle.ext.toItemList
 
 /**
  * Creates [PlaceListMapTemplate] from the given props
@@ -21,38 +24,14 @@ class RNPlaceListMapTemplate(
 ) : RNTemplate(context, renderContext) {
 
   override fun parse(props: ReadableMap): PlaceListMapTemplate {
+    val placeList = props.decode<VHPlaceListMapTemplate>()!!
     val builder = PlaceListMapTemplate.Builder()
-    builder.setTitle(props.getString("title")!!)
-    val children = props.getArray("children")
-    try {
-      builder.setHeaderAction(getHeaderAction(props.getString("headerAction"))!!)
-    } catch (e: Exception) {
-      e.printStackTrace()
-    }
-    val loading: Boolean = try {
-      props.getBoolean("isLoading")
-    } catch (e: Exception) {
-      children == null || children.size() == 0
-    }
-    Log.d(TAG, "Rendering " + if (loading) "Yes" else "No")
-    builder.setLoading(loading)
-    if (!loading) {
-      val itemListBuilder = ItemList.Builder()
-      for (i in 0 until children!!.size()) {
-        val child = children.getMap(i)
-        val type = child.getString("type")
-        Log.d(TAG, "Adding $type to row")
-        if (type == "row") {
-          itemListBuilder.addItem(buildRow(child))
-        }
-      }
-      builder.setItemList(itemListBuilder.build())
-    }
-    try {
-      val actionStripMap = props.getMap("actionStrip")!!
-      builder.setActionStrip(parseActionStrip(actionStripMap))
-    } catch (e: Exception) {
-      Log.w(TAG, "parse: failed to set the actionStrip: ${e.message}")
+    builder.setTitle(placeList.title)
+    placeList.headerAction?.let { builder.setHeaderAction(it.toAction(context, renderContext)) }
+    placeList.isLoading?.let { builder.setLoading(it) }
+    placeList.actionStrip?.let { builder.setActionStrip(it.toActionStrip(context, renderContext)) }
+    if (placeList.children.isNotEmpty()) {
+      builder.setItemList(placeList.children.first().toItemList(context, renderContext))
     }
     return builder.build()
   }

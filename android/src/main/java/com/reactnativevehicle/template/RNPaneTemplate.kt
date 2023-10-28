@@ -1,12 +1,15 @@
 package com.reactnativevehicle.template
 
-import android.util.Log
 import androidx.car.app.CarContext
-import androidx.car.app.model.Action
 import androidx.car.app.model.Pane
 import androidx.car.app.model.PaneTemplate
 import com.facebook.react.bridge.ReadableMap
 import com.reactnativevehicle.ReactCarRenderContext
+import com.reactnativevehicle.ext.decode
+import com.reactnativevehicle.ext.toAction
+import com.reactnativevehicle.ext.toActionStrip
+import com.reactnativevehicle.ext.toCarIcon
+import com.reactnativevehicle.ext.toRow
 
 /**
  * Creates [PaneTemplate] from the given props
@@ -23,50 +26,23 @@ class RNPaneTemplate(
 ) : RNTemplate(context, renderContext) {
 
   override fun parse(props: ReadableMap): PaneTemplate {
+    val pane = props.decode<VHPaneTemplate>()!!
+    val paneChildren = pane.children.first()
     val paneBuilder = Pane.Builder()
-    val children = props.getArray("children")
-    val loading: Boolean = try {
-      props.getBoolean("isLoading")
-    } catch (e: Exception) {
-      children == null || children.size() == 0
+
+    paneChildren.isLoading?.let { paneBuilder.setLoading(it) }
+    paneChildren.image?.let { paneBuilder.setImage(it.toCarIcon(context)) }
+    paneChildren.actionList?.forEach {
+      paneBuilder.addAction(it.toAction(context, renderContext))
+    }
+    paneChildren.children.forEach {
+      paneBuilder.addRow(it.toRow(context, renderContext))
     }
 
-    paneBuilder.setLoading(loading)
-    val actions = mutableListOf<Action>()
-    if (!loading) {
-      for (i in 0 until children!!.size()) {
-        val child = children.getMap(i)
-        val type = child.getString("type")
-        Log.d(TAG, "Adding child to row")
-        if (type == "row") {
-          paneBuilder.addRow(buildRow(child))
-        }
-        if (type == "action") {
-          actions.add(parseAction(child))
-        }
-      }
-      for (i in actions.indices) {
-        paneBuilder.addAction(actions[i])
-      }
-    }
     val builder = PaneTemplate.Builder(paneBuilder.build())
-    val title = props.getString("title")
-    if (title == null || title.isEmpty()) {
-      builder.setTitle("<No Title>")
-    } else {
-      builder.setTitle(title)
-    }
-    try {
-      builder.setHeaderAction(getHeaderAction(props.getString("headerAction"))!!)
-    } catch (e: Exception) {
-      e.printStackTrace()
-    }
-    try {
-      val actionStripMap = props.getMap("actionStrip")!!
-      builder.setActionStrip(parseActionStrip(actionStripMap))
-    } catch (e: Exception) {
-      Log.w(TAG, "parse: failed to set the actionStrip: ${e.message}")
-    }
+    pane.title?.let { builder.setTitle(it) }
+    pane.headerAction?.let { builder.setHeaderAction(it.toAction(context, renderContext)) }
+    pane.actionStrip?.let { builder.setActionStrip(it.toActionStrip(context, renderContext)) }
     return builder.build()
   }
 

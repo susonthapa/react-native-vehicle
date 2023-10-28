@@ -15,12 +15,14 @@ declare global {
       "list-template": NativeToJSXElement<"list-template">;
       "item-list": NativeToJSXElement<"item-list">;
       "place-list-map-template": NativeToJSXElement<"place-list-map-template">;
-      action: NativeToJSXElement<"action">;
+      "action": NativeToJSXElement<"action">;
       "pane-template": NativeToJSXElement<"pane-template">;
-      row: NativeToJSXElement<"row">;
+      "pane": NativeToJSXElement<"pane">;
+      "row": NativeToJSXElement<"row">;
       "grid-item": NativeToJSXElement<"grid-item">,
       "navigation-template": NativeToJSXElement<"navigation-template">;
       "grid-template": NativeToJSXElement<"grid-template">
+      "sectioned-item-list": NativeToJSXElement<"sectioned-item-list">
     }
   }
 }

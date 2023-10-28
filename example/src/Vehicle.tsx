@@ -6,16 +6,18 @@ import {
   ScreenManager,
   useCarNavigation
 } from 'react-native-vehicle';
+import { ActionType } from '../../src/types';
 
 const DeliveryListScreen = () => {
   const navigation = useCarNavigation()
   return (
     <list-template title={'Shopify Local Delivery'}>
-      <item-list header="Delivery Lists">
-        <row key={1} title={"Today's Delivery"} texts={['Delivery 1']} />
-        {/* <action title="Add Delivery" texts={['hello world']} /> */}
-        <action title="Add Delivery" onPress={() => navigation.pop()} />
-      </item-list>
+      <sectioned-item-list header='Delivery Lists'>
+        <item-list>
+          <row key={1} title={"Today's Delivery"} texts={['Delivery 1']} />
+          <action title="Add Delivery" onPress={() => navigation.pop()} />
+        </item-list>
+      </sectioned-item-list>
     </list-template>
   );
 };
@@ -74,13 +76,15 @@ const GridMenu = () => {
     return () => console.log('TODO: unmounting GridMenu')
   }, [])
   return (
-    <grid-template title='Grid Menus' headerAction={'back'}>
-      <grid-item title='Menu One' image={Image.resolveAssetSource(require('./images/gear.png'))} />
-      <grid-item title='Awesome Title' image={Image.resolveAssetSource(require('./images/gear.png'))} />
-      <grid-item title='Another Menu' image={Image.resolveAssetSource(require('./images/gear.png'))} />
-      <grid-item title='Test Menu' image={Image.resolveAssetSource(require('./images/gear.png'))} />
-      <grid-item title='Food Menu' image={Image.resolveAssetSource(require('./images/gear.png'))} />
-      <grid-item title='Settings Menu' image={Image.resolveAssetSource(require('./images/gear.png'))} />
+    <grid-template title='Grid Menus' headerAction={{ actionType: ActionType.BACK }}>
+      <item-list>
+        <grid-item title='Menu One' image={Image.resolveAssetSource(require('./images/gear.png'))} />
+        <grid-item title='Awesome Title' image={Image.resolveAssetSource(require('./images/gear.png'))} />
+        <grid-item title='Another Menu' image={Image.resolveAssetSource(require('./images/gear.png'))} />
+        <grid-item title='Test Menu' image={Image.resolveAssetSource(require('./images/gear.png'))} />
+        <grid-item title='Food Menu' image={Image.resolveAssetSource(require('./images/gear.png'))} />
+        <grid-item title='Settings Menu' image={Image.resolveAssetSource(require('./images/gear.png'))} />
+      </item-list>
     </grid-template>
   )
 }
