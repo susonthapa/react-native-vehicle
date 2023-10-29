@@ -4,7 +4,7 @@
 import React from 'react';
 import { AppRegistry } from 'react-native';
 import App from './src/App';
-import Vehicle from './src/Vehicle';
+import Vehicle from './src/vehicle/Vehicle';
 
 import { render } from 'react-native-vehicle';
 

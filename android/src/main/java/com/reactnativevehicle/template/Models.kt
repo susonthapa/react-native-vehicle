@@ -31,12 +31,20 @@ data class VHItemList(
 interface VHItem
 
 @JsonClass(generateAdapter = true)
+data class VHToggle(
+  val isChecked: Boolean,
+  val onCheckedChange: Int
+) : Codable
+
+@JsonClass(generateAdapter = true)
 data class VHRow(
   val type: String,
   val title: String,
   val texts: List<String>?,
   val image: VHIcon?,
   val onPress: Int?,
+  val isBrowsable: Boolean?,
+  val toggle: VHToggle?,
   // TODO(Fix this)
   val metadata: VHMetadata?,
 ) : Codable, VHItem
@@ -54,7 +62,7 @@ data class VHGridItem(
 @JsonClass(generateAdapter = true)
 data class VHMetadata(
   val distance: VHDistance,
-  val icon: String,
+  val icon: VHIcon,
   val latitude: Double,
   val longitude: Double
 ) : Codable

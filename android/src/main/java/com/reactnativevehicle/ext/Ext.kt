@@ -8,6 +8,7 @@ import androidx.car.app.model.CarIcon
 import androidx.car.app.model.GridItem
 import androidx.car.app.model.ItemList
 import androidx.car.app.model.Row
+import androidx.car.app.model.Toggle
 import androidx.core.graphics.drawable.IconCompat
 import com.facebook.common.references.CloseableReference
 import com.facebook.datasource.DataSources
@@ -24,6 +25,7 @@ import com.reactnativevehicle.template.VHGridItem
 import com.reactnativevehicle.template.VHIcon
 import com.reactnativevehicle.template.VHItemList
 import com.reactnativevehicle.template.VHRow
+import com.reactnativevehicle.template.VHToggle
 
 fun ReadableMap.isLoading(): Boolean {
   return try {
@@ -34,9 +36,8 @@ fun ReadableMap.isLoading(): Boolean {
   }
 }
 
-fun ReactCarRenderContext.invokeCallback(callbackId: Int) {
-  // TODO(Add Params support)
-  val params = WritableNativeMap()
+fun ReactCarRenderContext.invokeCallback(callbackId: Int, parameters: WritableNativeMap? = null) {
+  val params = parameters ?: WritableNativeMap()
   params.putInt("id", callbackId)
   eventCallback?.invoke(params)
 }
@@ -117,8 +118,21 @@ fun VHItemList.toItemList(context: Context, renderContext: ReactCarRenderContext
   children.forEach {
     if (it is VHGridItem) {
       builder.addItem(it.toGridItem(context, renderContext))
+    } else {
+      builder.addItem((it as VHRow).toRow(context, renderContext))
     }
   }
+
+  return builder.build()
+}
+
+fun VHToggle.toToggle(renderContext: ReactCarRenderContext): Toggle {
+  val builder = Toggle.Builder {
+    val params = WritableNativeMap()
+    params.putBoolean("isChecked", it)
+    renderContext.invokeCallback(onCheckedChange, params)
+  }
+  builder.setChecked(isChecked)
 
   return builder.build()
 }
@@ -129,6 +143,8 @@ fun VHRow.toRow(context: Context, renderContext: ReactCarRenderContext): Row {
   texts?.forEach { builder.addText(it) }
   image?.let { builder.setImage(it.toCarIcon(context)) }
   onPress?.let { builder.setOnClickListener { renderContext.invokeCallback(it) } }
+  isBrowsable?.let { builder.setBrowsable(it) }
+  toggle?.let { builder.setToggle(it.toToggle(renderContext)) }
 
   return builder.build()
 }
