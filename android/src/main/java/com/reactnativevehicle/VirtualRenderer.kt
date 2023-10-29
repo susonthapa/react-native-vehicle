@@ -13,6 +13,7 @@ import androidx.car.app.SurfaceCallback
 import androidx.car.app.SurfaceContainer
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactRootView
+import com.facebook.react.modules.appregistry.AppRegistry
 
 /**
  * Renders the view tree into a surface using VirtualDisplay. It runs the ReactNative component registered
@@ -66,6 +67,14 @@ class VirtualRenderer(private val context: CarContext, private val moduleName: S
       rootView?.let {
         setContentView(it)
       }
+    }
+  }
+
+  fun onDestroy() {
+    rootView?.let {
+      (context.applicationContext as ReactApplication).reactNativeHost.reactInstanceManager
+        .currentReactContext?.getJSModule(AppRegistry::class.java)
+        ?.unmountApplicationComponentAtRootTag(it.rootViewTag)
     }
   }
 

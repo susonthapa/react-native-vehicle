@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Image, Text, View } from "react-native";
 import { useCarNavigation } from "react-native-vehicle";
+import { ActionType } from "../../../src/types";
 
 const TestMap = () => {
   const [count, setCount] = useState(0)
   useEffect(() => {
-    console.log(`TODO: mounting TestMap`);
+    console.log(`Mounting TestMap`);
     const interval = setInterval(() => {
       setCount((count) => count + 1)
     }, 1000)
     return () => {
-      console.log(`TODO: unmounting TestMap`);
+      console.log(`Unmounting TestMap`);
       clearInterval(interval)
     }
   }, [])
@@ -24,18 +25,18 @@ const TestMap = () => {
 const NavigationTemplate = () => {
   const navigation = useCarNavigation()
   useEffect(() => {
-    console.log('TODO: mounting Main')
-    return () => console.log('TODO: unmounting Main')
+    console.log('Mounting NavigationTemplate')
+    return () => console.log('Unmounting NavigationTemplate')
   }, [])
   return (
     <navigation-template actionStrip={{
       actions: [
         {
-          title: 'Action One',
-          onPress: () => navigation.push('grid-menu'),
+          actionType: ActionType.BACK,
         },
         {
-          icon: Image.resolveAssetSource(require('./../images/click.png')),
+          title: 'Action One',
+          onPress: () => navigation.push('grid-menu'),
         },
         {
           icon: Image.resolveAssetSource(require('./../images/click.png')),

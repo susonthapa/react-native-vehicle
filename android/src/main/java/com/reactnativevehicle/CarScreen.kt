@@ -15,17 +15,19 @@ import com.facebook.react.bridge.ReadableMap
 class CarScreen(carContext: CarContext) : Screen(carContext) {
 
   private var template: Template? = null
-  private var virtualRenderer: VirtualRenderer? = null
+  var virtualRenderer: VirtualRenderer? = null
+    private set
 
   init {
-      lifecycle.addObserver(object: LifecycleEventObserver {
-        override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
-          if (event == Lifecycle.Event.ON_DESTROY && virtualRenderer != null) {
-            Log.d(TAG, "onStateChanged: got $event, removing virtual renderer")
-            virtualRenderer = null
-          }
+    lifecycle.addObserver(object : LifecycleEventObserver {
+      override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+        if (event == Lifecycle.Event.ON_DESTROY && virtualRenderer != null) {
+          Log.d(TAG, "onStateChanged: got $event, removing virtual renderer")
+          virtualRenderer?.onDestroy()
+          virtualRenderer = null
         }
-      })
+      }
+    })
   }
 
   fun setTemplate(template: Template?, args: ReadableMap) {
