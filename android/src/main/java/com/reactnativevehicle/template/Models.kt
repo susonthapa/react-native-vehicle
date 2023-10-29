@@ -45,7 +45,6 @@ data class VHRow(
   val onPress: Int?,
   val isBrowsable: Boolean?,
   val toggle: VHToggle?,
-  // TODO(Fix this)
   val metadata: VHMetadata?,
 ) : Codable, VHItem
 
@@ -60,11 +59,29 @@ data class VHGridItem(
 ) : Codable, VHItem
 
 @JsonClass(generateAdapter = true)
-data class VHMetadata(
-  val distance: VHDistance,
+data class VHCarLocation(
+  val lat: Double,
+  val lng: Double
+) : Codable
+
+@JsonClass(generateAdapter = true)
+data class VHPlaceMarker(
   val icon: VHIcon,
-  val latitude: Double,
-  val longitude: Double
+  val label: String?,
+  val color: Int?,
+  val iconType: Int,
+) : Codable
+
+@JsonClass(generateAdapter = true)
+data class VHPlace(
+  val location: VHCarLocation,
+  val marker: VHPlaceMarker,
+) : Codable
+
+@JsonClass(generateAdapter = true)
+data class VHMetadata(
+  val place: VHPlace,
+  val distance: VHDistance?,
 ) : Codable
 
 @JsonClass(generateAdapter = true)
