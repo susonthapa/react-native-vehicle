@@ -1,21 +1,45 @@
 import type React from "react";
 import type { ImageResolvedAssetSource } from "react-native";
 
-type CarColor =
-  | "blue"
-  | "green"
-  | "primary"
-  | "red"
-  | "secondary"
-  | "yellow"
-  | "default";
 type PressHandler = (event: {}) => any
-interface PlaceMetadata {
-  type: "place";
-  distance: Distance,
-  icon: ImageResolvedAssetSource,
-  latitude: number;
-  longitude: number;
+
+enum CarColor {
+  CUSTOM,
+  DEFAULT,
+  PRIMARY,
+  SECONDARY,
+  RED,
+  GREEN,
+  BLUE,
+  YELLOW
+}
+
+export enum MarkerIconType {
+  ICON,
+  IMAGE
+}
+
+export enum DistanceUnit {
+  UNIT_METERS = 1,
+  UNIT_KILOMETERS,
+  UNIT_KILOMETERS_P1,
+  UNIT_MILES,
+  UNIT_MILES_P1,
+  UNIT_FEET,
+  UNIT_YARDS
+}
+
+interface Place {
+  location: {
+    lat: number,
+    lng: number
+  },
+  marker: {
+    icon: ImageResolvedAssetSource,
+    iconType: MarkerIconType
+    label?: string,
+    color?: CarColor,
+  }
 }
 
 interface ActionStrip {
@@ -40,7 +64,7 @@ type Step = {
 
 type Distance = {
   displayDistance: number,
-  displayUnit: number,
+  displayUnit: DistanceUnit,
 }
 
 type RoutingInfo = {
@@ -67,8 +91,6 @@ type TravelEstimate = {
   remainingTimeSeconds: number,
 }
 
-type Metadata = PlaceMetadata;
-
 interface CommonAttributes {
   key?: string | number;
 }
@@ -93,13 +115,24 @@ interface Action extends CommonAttributes {
   onPress?: (event: {}) => any;
 }
 
+interface Toggle extends CommonAttributes {
+  type: "toggle",
+  isChecked: boolean,
+  onCheckedChange: (isChecked: boolean) => void,
+}
+
 interface Row extends CommonAttributes {
   type: "row";
   title: string;
   texts?: string[];
   image?: ImageResolvedAssetSource;
+  isBrowsable?: boolean
+  toggle?: Toggle
   onPress?: PressHandler;
-  metadata?: Metadata | undefined;
+  metadata?: {
+    place: Place,
+    distance?: Distance,
+  };
 }
 
 interface GridItem extends CommonAttributes {
@@ -206,7 +239,8 @@ export type VehicleElement =
   | Screen
   | Pane
   | Action
-  | SectionedItemList;
+  | SectionedItemList
+  | Toggle;
 export type ElementType = VehicleElement["type"];
 export interface Route {
   name: string;

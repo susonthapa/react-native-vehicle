@@ -12,19 +12,22 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "list-template": NativeToJSXElement<"list-template">;
       "item-list": NativeToJSXElement<"item-list">;
-      "place-list-map-template": NativeToJSXElement<"place-list-map-template">;
       "action": NativeToJSXElement<"action">;
-      "pane-template": NativeToJSXElement<"pane-template">;
       "pane": NativeToJSXElement<"pane">;
       "row": NativeToJSXElement<"row">;
-      "grid-item": NativeToJSXElement<"grid-item">,
-      "navigation-template": NativeToJSXElement<"navigation-template">;
-      "grid-template": NativeToJSXElement<"grid-template">
+      "grid-item": NativeToJSXElement<"grid-item">
       "sectioned-item-list": NativeToJSXElement<"sectioned-item-list">
+      "toggle": NativeToJSXElement<"toggle">
+
+      // Templates
+      "navigation-template": NativeToJSXElement<"navigation-template">;
+      "list-template": NativeToJSXElement<"list-template">;
+      "place-list-map-template": NativeToJSXElement<"place-list-map-template">;
+      "grid-template": NativeToJSXElement<"grid-template">
+      "pane-template": NativeToJSXElement<"pane-template">;
     }
   }
 }
 
-export {};
+export { };

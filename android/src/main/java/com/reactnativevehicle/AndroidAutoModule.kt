@@ -10,6 +10,7 @@ import androidx.car.app.CarContext
 import androidx.car.app.CarToast
 import androidx.car.app.ScreenManager
 import androidx.car.app.model.Template
+import androidx.car.app.navigation.model.NavigationTemplate
 import com.facebook.react.bridge.*
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
