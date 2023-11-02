@@ -71,11 +71,7 @@ class VirtualRenderer(private val context: CarContext, private val moduleName: S
   }
 
   fun onDestroy() {
-    rootView?.let {
-      (context.applicationContext as ReactApplication).reactNativeHost.reactInstanceManager
-        .currentReactContext?.getJSModule(AppRegistry::class.java)
-        ?.unmountApplicationComponentAtRootTag(it.rootViewTag)
-    }
+    rootView?.unmountReactApplication()
   }
 
   companion object {
